@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PrescriptoMate</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+</head>
+<body>
+    <h1>Create Patient Orders</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <label for="patient_name">Patient Name:</label><br>
+        <input type="text" id="patient_name" name="patient_name" required><br><br>
+
+        <label for="prescription_image">Upload Prescription Image:</label><br>
+        <input type="file" id="prescription_image" name="prescription_image" accept="image/*" required><br><br>  <!-- Added accept attribute -->
+
+        <img id="preview" src="" alt="Image Preview" style="display: none;">
+
+        <input type="submit" value="Process Prescription">
+
+    </form>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>

@@ -1,0 +1,118 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to right, #83a4d4, #aac4ede4); /* Gradient background */
+    margin: 0;
+    height: 100vh; /* Full screen height */
+    background-image: url('./bg.jpg'); /* Replace with the path to your background image */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align items at the top */
+    flex-direction: column;
+}
+
+h1 {
+    color: #fff;
+    background-color: #0a0b0ba6; /* Steel blue background */
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    position: absolute;
+    top: 40px; /* Move the heading towards the top */
+    left: 50%; /* Position from the left */
+    transform: translateX(-50%); /* Offset by 50% to center horizontally */
+    width: auto;
+}
+
+h2 {
+    color: #333;
+    text-align: center;
+}
+
+/* Form styling */
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(165, 19, 19, 0.844);
+    max-width: 500px; 
+    margin: 50px auto 0; /* Add margin to move it down */
+    /* The '50px' margin pushes it lower than the center */
+}
+
+/* Labels */
+label {
+    display: block;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+/* Input fields and textarea */
+input[type="text"], textarea, input[type="file"] {
+    width: 98%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Resize textarea */
+textarea {
+    resize: vertical;
+}
+
+/* Submit button */
+input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+    clear: both;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+/* Style for lists */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 5px;
+}
+
+/* Links */
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Image preview */
+#preview {
+    max-width: 300px;
+    max-height: 200px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+}
+
+/* Style the pre tag for OCR output */
+pre {
+    white-space: pre-wrap;
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 4px;
+}

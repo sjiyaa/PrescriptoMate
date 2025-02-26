@@ -1,16 +1,15 @@
 from flask import Flask, render_template, request, redirect, url_for
 import os
-import pytesseract  # Import pytesseract
-from PIL import Image  # Import Pillow
+import pytesseract  
+from PIL import Image  
 
 app = Flask(__name__)
 
-# Configuration
 UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-# In-memory inventory (same as before)
+# In-memory inventory
 inventory = {
     "paracetamol": {"price": 1.50, "stock": 100},
     "citagen": {"price": 3.00, "stock": 50},
@@ -19,7 +18,6 @@ inventory = {
 }
 
 def allowed_file(filename):
-    """Checks if the uploaded file has an allowed extension."""
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route('/', methods=['GET', 'POST'])
@@ -27,7 +25,6 @@ def index():
     if request.method == 'POST':
         patient_name = request.form['patient_name']
 
-        # Check if the post request has the file part
         if 'prescription_image' not in request.files:
             return redirect(request.url)
 
@@ -39,7 +36,7 @@ def index():
             return redirect(request.url)
 
         if file and allowed_file(file.filename):
-            # Save the uploaded file
+            # Saving the uploaded file
             filename = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
             file.save(filename)
 
@@ -49,10 +46,10 @@ def index():
             except Exception as e:
                 return f"Error during OCR: {str(e)}"  # Handle OCR errors
 
-            # Process the prescription (same logic as before)
+            # Process the prescription
             order, unmatched_items = process_prescription(prescription_text, inventory)
 
-            # Optionally: Delete the uploaded image after processing to save space.
+            # Delete the uploaded image after processing to save space.
             os.remove(filename)
 
             return render_template('results.html',
@@ -67,14 +64,10 @@ def index():
 
 
 def process_prescription(prescription_text, inventory):
-    """
-    Same prescription processing logic as before.
-    """
-    # Split by newlines, commas, and common delimiters
     prescribed_medicines = [med.strip().lower() for line in prescription_text.split('\n')
                               for part in line.split(',')
                               for med in part.split()
-                              if med.strip()] #clean words
+                              if med.strip()] 
     order = {}
     unmatched_items = []
 

@@ -10,22 +10,21 @@ function previewImage(event) {
           preview.style.display = 'block'; // Show the preview
       };
 
-      reader.readAsDataURL(input.files[0]); // Read the image file
+      reader.readAsDataURL(input.files[0]); 
   } else {
       preview.src = '';
-      preview.style.display = 'none';  // Hide if no image
+      preview.style.display = 'none';  // Hides if no image
   }
 }
 
 
 function validateForm() {
-// Basic form validation: Check that fields are not empty
   const patientName = document.getElementById('patient_name').value.trim();
   const prescriptionImage = document.getElementById('prescription_image').value;
 
   if (!patientName) {
       alert('Please enter a patient name.');
-      return false; // Prevent form submission
+      return false; 
   }
 
   if (!prescriptionImage) {
@@ -33,7 +32,7 @@ function validateForm() {
     return false;
   }
 
-  return true; // Allow form submission if valid
+  return true;
 }
 
 document.addEventListener('DOMContentLoaded', (event) => {
@@ -42,10 +41,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
     fileInput.addEventListener('change', previewImage);
   }
 
-  //attach event listener to validate the form when submit is pressed
-  const form = document.querySelector('form'); // Selects the FIRST form it finds!
-  if (form) { // Make sure the form exists.
-    form.addEventListener('submit', validateForm); //Correct Event
+  const form = document.querySelector('form'); 
+  if (form) { 
+    form.addEventListener('submit', validateForm); 
   }
 
 });

@@ -17,7 +17,7 @@
                 <th>Status</th>
             </tr>
             {% for medicine, details in order.items() %}
-            {% if details.in_stock %}
+            {% if details.in_stock %} 
             <tr>
                 <td>{{ medicine }}</td>
                 <td>Rs. {{ details.price }}</td>

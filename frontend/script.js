@@ -1,49 +1,32 @@
-function previewImage(event) {
-  const input = event.target;
-  const preview = document.getElementById('preview');
+function updateQuantity(medicine, change) {
+    let qtyElement = document.getElementById(`qty_${medicine}`);
+    let totalElement = document.getElementById(`total_${medicine}`);
+    let grandTotalElement = document.getElementById('grand_total');
 
-  if (input.files && input.files[0]) {
-      const reader = new FileReader();
+    // Get the price from the second column (correct column)
+    let priceElement = totalElement.parentElement.querySelector('td:nth-child(2)');
+    let price = parseFloat(priceElement.textContent.replace('Rs.', '').trim());
 
-      reader.onload = function (e) {
-          preview.src = e.target.result;
-          preview.style.display = 'block'; // Show the preview
-      };
+    let quantity = parseInt(qtyElement.textContent) + change;
 
-      reader.readAsDataURL(input.files[0]); 
-  } else {
-      preview.src = '';
-      preview.style.display = 'none';  // Hides if no image
-  }
+    if (quantity >= 1) {
+        qtyElement.textContent = quantity;
+        totalElement.textContent = `Rs.${(price * quantity).toFixed(2)}`;
+    }
+
+    updateGrandTotal();
 }
 
+function updateGrandTotal() {
+    let totalElements = document.querySelectorAll('[id^=total_]');
+    let grandTotal = 0;
 
-function validateForm() {
-  const patientName = document.getElementById('patient_name').value.trim();
-  const prescriptionImage = document.getElementById('prescription_image').value;
+    totalElements.forEach(element => {
+        let value = parseFloat(element.textContent.replace('Rs.', '').trim());
+        if (!isNaN(value)) {
+            grandTotal += value;
+        }
+    });
 
-  if (!patientName) {
-      alert('Please enter a patient name.');
-      return false; 
-  }
-
-  if (!prescriptionImage) {
-    alert("Please select a prescription image");
-    return false;
-  }
-
-  return true;
+    document.getElementById('grand_total').textContent = `₹${grandTotal.toFixed(2)}`;
 }
-
-document.addEventListener('DOMContentLoaded', (event) => {
-  const fileInput = document.getElementById('prescription_image');
-  if(fileInput){
-    fileInput.addEventListener('change', previewImage);
-  }
-
-  const form = document.querySelector('form'); 
-  if (form) { 
-    form.addEventListener('submit', validateForm); 
-  }
-
-});
